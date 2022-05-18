@@ -4,6 +4,16 @@ defmodule JocaGame.Game.Status do
   end
 
   def status_players do
-    IO.inspect(JocaGame.Game.info())
+
+    Map.get(JocaGame.Game.info(), :players)
+    |> Tuple.to_list()
+    |> Enum.each(fn x ->
+      IO.puts('''
+      -----------------------------
+      | Jogador #{x.name}
+      | Vida: #{x.life} - dinheiro: #{x.money}
+      ---------------------------
+    ''')
+    end)
   end
 end

@@ -1,8 +1,8 @@
 defmodule JocaGame.Game do
   use Agent
 
-  def start(player) do
-    initial_value = %{players: {player}, turn: 0, status: :attack}
+  def start() do
+    initial_value = %{players: {}, turn: 0, status: :attack}
     Agent.start_link(fn -> initial_value end, name: __MODULE__)
   end
 
@@ -14,8 +14,18 @@ defmodule JocaGame.Game do
      players = Map.get(info(), :players)
     |> Tuple.append(player)
 
-    info = Map.replace(info(), :players, players)
+    Map.replace(info(), :players, players)
+    |> update_state()
+  end
 
+  def change_status(status) do
+    info()
+    |> Map.replace(:status, status)
+    |> update_state()
+
+  end
+
+  def update_state(info) do
     Agent.update(__MODULE__, fn _ -> info end)
   end
 end

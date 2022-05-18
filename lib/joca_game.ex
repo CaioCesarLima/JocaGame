@@ -4,6 +4,8 @@ defmodule JocaGame do
   use Application
 
   def start(_type, _args) do
+    JocaGame.Game.start()
+    IO.ANSI.clear()
     run()
     {:ok, self()}
   end
@@ -35,22 +37,28 @@ defmodule JocaGame do
 
   defp create_player(number) when number > 0 do
     player = IO.gets("Nome do jogador? \n")
+    |> String.trim()
     |> Player.build()
 
+    JocaGame.Game.add_player(player)
 
-    IO.puts('''
-      -----------------------------
-      | Jogador #{player.name}
-      | Vida: #{player.life} - dinheiro: #{player.money}
-      ---------------------------
-    ''')
+
+    # IO.puts('''
+    #   -----------------------------
+    #   | Jogador #{player.name}
+    #   | Vida: #{player.life} - dinheiro: #{player.money}
+    #   ---------------------------
+    # ''')
 
     create_player(number - 1)
   end
 
   defp create_player(0) do
-    IO.puts("Todos jogadores criados!")
-    IO.puts("Tenha um ótimo jogo")
+    IO.ANSI.color_background(2, 4, 5)
+    IO.ANSI.clear()
+    Status.status_players()
+
+    IO.puts("O jogo vai começar!")
 
   end
 
