@@ -1,5 +1,6 @@
 defmodule JocaGame do
   alias JocaGame.Player
+  alias JocaGame.Game.Status
   use Application
 
   def start(_type, _args) do
@@ -14,7 +15,7 @@ defmodule JocaGame do
   end
 
   def run do
-    IO.puts("Bem vindo ao jogo!")
+    Status.welcome_message
     IO.gets("Quantos jogadores irão participar da partida? \n")
     |> Integer.parse()
     |> parse()
@@ -35,6 +36,7 @@ defmodule JocaGame do
   defp create_player(number) when number > 0 do
     player = IO.gets("Nome do jogador? \n")
     |> Player.build()
+
 
     IO.puts('''
       -----------------------------
