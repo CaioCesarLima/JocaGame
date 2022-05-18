@@ -1,6 +1,5 @@
 defmodule JocaGame do
-  alias JocaGame.Player
-  alias JocaGame.Game.Status
+  alias JocaGame.{Game.Status, Player, Game.Match.Match}
   use Application
 
   def start(_type, _args) do
@@ -58,7 +57,7 @@ defmodule JocaGame do
     IO.ANSI.clear()
     Status.status_players()
 
-    IO.puts("O jogo vai começar!")
+    Match.match_start()
 
   end
 
