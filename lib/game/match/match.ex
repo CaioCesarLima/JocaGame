@@ -1,6 +1,7 @@
 defmodule JocaGame.Game.Match.Match do
 
   alias JocaGame.Game.Status
+  alias JocaGame.Game, as: State
 
   def match_start(), do: IO.puts("Ok")
 
@@ -26,5 +27,8 @@ defmodule JocaGame.Game.Match.Match do
 
   defp players_list(players), do: players |> Tuple.to_list()
 
-
+  def change_turn() do
+    State.change_turn()
+    Status.alert_turn()
+  end
 end

@@ -28,4 +28,14 @@ defmodule JocaGame.Game.Status do
     |> Tuple.to_list()
     |> Enum.find_index(fn x -> x.name == name end)
   end
+
+  def alert_turn() do
+    turn = status_game()
+    |> Map.get(:turn)
+
+    IO.puts("================================================================")
+    IO.puts("Vez do jogador: #{turn}")
+    IO.puts("================================================================")
+  end
+
 end
