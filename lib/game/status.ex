@@ -44,4 +44,9 @@ defmodule JocaGame.Game.Status do
     |> Tuple.to_list()
     |> length()
   end
+
+  def get_turn() do
+    Game.info()
+    |> Map.get(:turn)
+  end
 end

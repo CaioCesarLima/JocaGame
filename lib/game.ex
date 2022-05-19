@@ -73,4 +73,11 @@ defmodule JocaGame.Game do
     |> Map.replace(:players, players)
     |> update_state()
   end
+
+  def get_player_by_name(name) do
+    info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> Enum.find(fn x -> x.name == name end)
+  end
 end
