@@ -59,4 +59,18 @@ defmodule JocaGame.Game do
     IO.puts(next_player_turn.name)
   end
 
+  def player_dead(player) do
+    player_index = info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> Enum.find_index(fn x -> x.name == player.name end)
+
+    players = info()
+    |> Map.get(:players)
+    |> Tuple.delete_at(player_index)
+
+    info()
+    |> Map.replace(:players, players)
+    |> update_state()
+  end
 end

@@ -38,4 +38,10 @@ defmodule JocaGame.Game.Status do
     IO.puts("================================================================")
   end
 
+  def players_alive do
+    Game.info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> length()
+  end
 end
