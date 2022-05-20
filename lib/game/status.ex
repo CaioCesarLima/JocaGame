@@ -34,6 +34,7 @@ defmodule JocaGame.Game.Status do
   def alert_turn() do
     turn = status_game()
     |> Map.get(:turn)
+    clear()
     :timer.sleep(500)
     IO.puts("\n")
     IO.puts("================================================================")
@@ -78,5 +79,9 @@ defmodule JocaGame.Game.Status do
                    ||----w |
                    ||     ||
     ''')
+  end
+  def clear()do
+    [1..10]
+    |> Enum.each(fn _x -> IO.puts("\n") end)
   end
 end

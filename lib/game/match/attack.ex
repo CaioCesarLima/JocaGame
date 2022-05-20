@@ -17,6 +17,10 @@ defmodule JocaGame.Game.Match.Attack do
         |> Map.replace(:life, oponent.life - damage)
         |> State.update_user()
     end
+    player
+    |> Map.replace(:money, player.money + 10)
+    |> State.update_user()
+
     Match.change_turn()
   end
 
