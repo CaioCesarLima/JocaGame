@@ -16,10 +16,16 @@ defmodule JocaGame.Game.Match.Match do
   defp players_list(players), do: players |> Tuple.to_list()
 
   def change_turn() do
-    Status.status_players()
-    State.change_turn()
-    Status.alert_turn()
-    player_choice()
+    cond do
+      Status.players_alive() > 1 ->
+        Status.status_players()
+        State.change_turn()
+        Status.alert_turn()
+        player_choice()
+      Status.players_alive() == 1 ->
+        game_over()
+    end
+
   end
 
   def player_choice() do
@@ -58,5 +64,11 @@ defmodule JocaGame.Game.Match.Match do
       oponent.name == turn -> random_player(Status.status_game())
       true -> oponent
     end
+  end
+
+  def game_over() do
+    Status.get_turn()
+    |> State.get_player_by_name()
+    |> Status.game_over()
   end
 end

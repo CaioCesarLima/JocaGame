@@ -21,7 +21,6 @@ defmodule JocaGame.Game.Status do
   end
 
   def status_game() do
-    :timer.sleep(500)
     Game.info()
   end
 
@@ -54,5 +53,30 @@ defmodule JocaGame.Game.Status do
   def get_turn() do
     Game.info()
     |> Map.get(:turn)
+  end
+
+  def game_over(player) do
+    IO.puts("\n")
+    :timer.sleep(500)
+    IO.puts("**********")
+    IO.puts("Game over")
+    IO.puts("**********")
+    :timer.sleep(500)
+    IO.puts("\n")
+    IO.puts("===================================================")
+    IO.puts("Vencedor: #{player.name}!")
+    IO.puts("===================================================")
+    IO.puts("\n")
+    :timer.sleep(1000)
+    IO.puts('''
+
+    < Obrigado por jogar! >
+    ------------------------
+          ||   ^__^
+          ||   (oo)|_______
+               (__)|       |_/
+                   ||----w |
+                   ||     ||
+    ''')
   end
 end
