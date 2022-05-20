@@ -74,6 +74,7 @@ defmodule JocaGame.Game.Match.Shop do
       player.money >= item_selected.price ->
         player
         |> Map.replace(type, item_selected.type)
+        |> Map.replace(:money, player.money - item_selected.price)
         |> State.update_user()
 
         IO.puts("\n")

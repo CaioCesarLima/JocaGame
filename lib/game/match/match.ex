@@ -13,9 +13,6 @@ defmodule JocaGame.Game.Match.Match do
     |> Enum.find_index(fn x -> x.name == name end)
   end
 
-
-
-
   defp players_list(players), do: players |> Tuple.to_list()
 
   def change_turn() do
