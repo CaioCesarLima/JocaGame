@@ -35,7 +35,6 @@ defmodule JocaGame.Game do
     |> Tuple.to_list()
     |> Enum.find_index(fn x -> x.name == info().turn end)
 
-    IO.puts(player_index)
     total_players = info()
     |> Map.get(:players)
     |> Tuple.to_list()
@@ -45,7 +44,6 @@ defmodule JocaGame.Game do
       true -> player_index + 1
       false -> 0
     end
-    IO.puts(next_player_index)
 
     next_player_turn = info()
     |> Map.get(:players)
@@ -55,8 +53,6 @@ defmodule JocaGame.Game do
     info()
     |> Map.replace(:turn, next_player_turn.name)
     |> update_state()
-
-    IO.puts(next_player_turn.name)
   end
 
   def player_dead(player) do
@@ -79,5 +75,23 @@ defmodule JocaGame.Game do
     |> Map.get(:players)
     |> Tuple.to_list()
     |> Enum.find(fn x -> x.name == name end)
+  end
+
+
+  def update_user(player) do
+    player_index = info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> Enum.find_index(fn x -> x.name == player.name end)
+
+    players = info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> List.replace_at(player_index, player)
+    |> List.to_tuple()
+
+    info()
+    |> Map.replace(:players, players)
+    |> update_state()
   end
 end

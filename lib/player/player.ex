@@ -8,7 +8,7 @@ defmodule JocaGame.Player do
       life: 100,
       shield: :none,
       sword: :hands,
-      money: 0
+      money: 10
     }
   end
 end

@@ -10,6 +10,7 @@ defmodule JocaGame do
   end
 
   def run(:erro) do
+    IO.puts("\n")
     IO.gets("Quantos jogadores irão participar da partida? \n")
     |> Integer.parse()
     |> parse()
@@ -17,24 +18,28 @@ defmodule JocaGame do
 
   def run do
     Status.welcome_message
+    IO.puts("\n")
     IO.gets("Quantos jogadores irão participar da partida? \n")
     |> Integer.parse()
     |> parse()
   end
 
   defp parse(:error) do
+    :timer.sleep(500)
+    IO.puts("\n")
     IO.puts("Entrada invalida")
     IO.puts("====================================")
     run(:erro)
   end
 
   defp parse({number, _}) do
-    IO.puts("====================================")
+    :timer.sleep(500)
     number
     |>create_player()
   end
 
   defp create_player(number) when number > 0 do
+    IO.puts("\n")
     player = IO.gets("Nome do jogador? \n")
     |> String.trim()
     |> Player.build()
