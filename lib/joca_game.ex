@@ -60,7 +60,6 @@ defmodule JocaGame do
   defp create_player(0) do
     IO.ANSI.color_background(2, 4, 5)
     IO.ANSI.clear()
-    Status.status_players()
 
     Match.match_start()
 

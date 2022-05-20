@@ -1,7 +1,7 @@
 defmodule JocaGame.Game.Match.Match do
 
   alias JocaGame.Game.Status
-  alias JocaGame.Game.Match.Shop
+  alias JocaGame.Game.Match.{Shop, Attack}
   alias JocaGame.Game, as: State
 
   def match_start(), do: change_turn()
@@ -16,6 +16,7 @@ defmodule JocaGame.Game.Match.Match do
   defp players_list(players), do: players |> Tuple.to_list()
 
   def change_turn() do
+    Status.status_players()
     State.change_turn()
     Status.alert_turn()
     player_choice()
@@ -34,8 +35,7 @@ defmodule JocaGame.Game.Match.Match do
   defp choice(:atacar, turn) do
     oponent = random_player(Status.status_game())
     player = State.get_player_by_name(turn)
-    :timer.sleep(1000)
-    IO.puts("#{player.name} vai atacar #{oponent.name}")
+    Attack.init_attack(player, oponent)
   end
   defp choice(:doar, _turn) do
     :timer.sleep(1000)

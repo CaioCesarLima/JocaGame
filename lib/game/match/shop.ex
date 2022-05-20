@@ -24,6 +24,7 @@ defmodule JocaGame.Game.Match.Shop do
     # ''')
     IO.puts("\n")
     IO.puts("==================================================")
+    IO.puts("Code: 0 - Sair do shopping")
     IO.puts("Espadas")
 
     @swords
@@ -61,6 +62,10 @@ defmodule JocaGame.Game.Match.Shop do
     @swords
     |> Enum.find(fn x -> x[:code] == code end)
     |> verify_buy(player, :sword)
+  end
+
+  def get_code_buy({0, _}, _player) do
+    Match.player_choice()
   end
 
   def get_code_buy(_code, player) do
