@@ -55,6 +55,23 @@ defmodule JocaGame.Game do
     |> update_state()
   end
 
+  def change_turn(:no_turn) do
+    # info = info()
+    # |> Map.get(:players)
+    # |> Tuple.to_list()
+    # |> length()
+
+    player = info()
+    |> Map.get(:players)
+    |> Tuple.to_list()
+    |> Enum.random()
+
+    info()
+    |> Map.replace(:turn, player.name)
+    |> update_state()
+
+  end
+
   def player_dead(player) do
     player_index = info()
     |> Map.get(:players)

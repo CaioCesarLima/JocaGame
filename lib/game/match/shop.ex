@@ -94,4 +94,15 @@ defmodule JocaGame.Game.Match.Shop do
       true -> true
     end
   end
+
+  def get_random_sword() do
+    @swords
+    |> Enum.random()
+  end
+
+  def get_random_shield() do
+    @shields
+    |> Enum.random()
+
+  end
 end

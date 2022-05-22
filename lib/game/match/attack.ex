@@ -26,7 +26,7 @@ defmodule JocaGame.Game.Match.Attack do
 
   def calculate_damage(player, oponent) do
     damage = case player.sword do
-      :hands -> 100
+      :hands -> 5
       :sword_simple -> 10
       :sword_magic -> 20
       :sword_king -> 30

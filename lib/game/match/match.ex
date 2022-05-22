@@ -1,7 +1,7 @@
 defmodule JocaGame.Game.Match.Match do
 
   alias JocaGame.Game.Status
-  alias JocaGame.Game.Match.{Shop, Attack}
+  alias JocaGame.Game.Match.{Shop, Attack, Donate}
   alias JocaGame.Game, as: State
 
   def match_start(), do: change_turn()
@@ -27,6 +27,19 @@ defmodule JocaGame.Game.Match.Match do
     end
 
   end
+  def change_turn(:no_turn) do
+    cond do
+      Status.players_alive() > 1 ->
+        Status.status_players()
+        State.change_turn(:no_turn)
+        Status.alert_turn()
+        player_choice()
+      Status.players_alive() == 1 ->
+        State.change_turn(:no_turn)
+        game_over()
+    end
+
+  end
 
   def player_choice() do
     turn = Status.get_turn()
@@ -43,9 +56,10 @@ defmodule JocaGame.Game.Match.Match do
     player = State.get_player_by_name(turn)
     Attack.init_attack(player, oponent)
   end
-  defp choice(:doar, _turn) do
+  defp choice(:doar, turn) do
     :timer.sleep(1000)
-    IO.puts("doando")
+    player = State.get_player_by_name(turn)
+    Donate.init_donate(player)
   end
   defp choice(:comprar, turn) do
     :timer.sleep(1000)
@@ -57,7 +71,7 @@ defmodule JocaGame.Game.Match.Match do
     player_choice()
   end
 
-  defp random_player(%{players: players, turn: turn}) do
+  def random_player(%{players: players, turn: turn}) do
     oponent = players_list(players)
     |> Enum.random()
     cond do
