@@ -49,13 +49,10 @@ defmodule JocaGame.Game.Match.Shop do
   end
 
   def get_code_buy({code, _}, player) when code in 4..6 do
-    item_selected = @shields
+    @shields
     |> Enum.find(fn x -> x[:code] == code end)
     |> verify_buy(player, :shield)
 
-    IO.puts(:escudo)
-    IO.inspect(item_selected)
-    IO.puts("====================================")
   end
 
   def get_code_buy({code, _}, player) when code in 1..3 do
